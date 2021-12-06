@@ -23,9 +23,9 @@ final class ProgrammeDetailsVM : ObservableObject{
     func closeAction(){
         coordinator?.close()
     }
-    
+
     func getPitch(programM: ProgrammeModel){
-        observer = programmeService.getPitch(pitchUrl: programM.detaillink ?? "")
+        observer = programmeService.getPitch(detailLink: apiUrl + (programM.detaillink ?? ""))
             .receive(on: RunLoop.main)
             .sink { completion in
                 switch completion{

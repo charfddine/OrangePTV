@@ -23,8 +23,8 @@ final class ProgrammeServices : ProgrammeServiceProtocol{
     }
     
     // MARK: Récupération du Pitch pour un film ou une serie
-    func getPitch(pitchUrl : String)-> AnyPublisher<String, Error>{
-        let url = URL(string: apiUrl + pitchUrl)!
+    func getPitch(detailLink : String)-> AnyPublisher<String, Error>{
+        guard let url = URL(string: detailLink) else { return Empty(completeImmediately: false).eraseToAnyPublisher() }
         return URLSession.shared.dataTaskPublisher(for: url)
             .mapError { $0 as Error }
             .map {
@@ -49,7 +49,6 @@ final class ProgrammeServices : ProgrammeServiceProtocol{
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-
     }
     
 }

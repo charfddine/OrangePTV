@@ -46,5 +46,10 @@ class ProgrammeServicesMock: ProgrammeServiceProtocol {
             .eraseToAnyPublisher()
     }
     
+    func getPitch(detailLink: String) -> AnyPublisher<String, Error> {
+        return Just("This is my pitch")
+            .mapError({ _ in  AppError.invalidData })
+            .eraseToAnyPublisher()
+    }
 
 }
