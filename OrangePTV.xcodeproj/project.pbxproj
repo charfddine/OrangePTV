@@ -37,6 +37,10 @@
 		6A6ADF78275E362100AC6237 /* OrangePTVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6ADF77275E362100AC6237 /* OrangePTVTests.swift */; };
 		6A6ADF80275E364500AC6237 /* ProgrammeServicesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6ADF7F275E364500AC6237 /* ProgrammeServicesMock.swift */; };
 		6A6ADF83275E36C200AC6237 /* ListProgrammeUc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6ADF82275E36C200AC6237 /* ListProgrammeUc.swift */; };
+		6A6ADF85275E414B00AC6237 /* ProgrammeDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6ADF84275E414B00AC6237 /* ProgrammeDetailsVM.swift */; };
+		6A6ADF87275E417800AC6237 /* ProgrammeDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6ADF86275E417800AC6237 /* ProgrammeDetailsCoordinator.swift */; };
+		6A6ADF8A275E41A900AC6237 /* ProgrammeDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6ADF89275E41A900AC6237 /* ProgrammeDetailsVC.swift */; };
+		6A6ADF8C275E422C00AC6237 /* ProgrammeModelDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6ADF8B275E422C00AC6237 /* ProgrammeModelDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,10 @@
 		6A6ADF77275E362100AC6237 /* OrangePTVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrangePTVTests.swift; sourceTree = "<group>"; };
 		6A6ADF7F275E364500AC6237 /* ProgrammeServicesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammeServicesMock.swift; sourceTree = "<group>"; };
 		6A6ADF82275E36C200AC6237 /* ListProgrammeUc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListProgrammeUc.swift; sourceTree = "<group>"; };
+		6A6ADF84275E414B00AC6237 /* ProgrammeDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammeDetailsVM.swift; sourceTree = "<group>"; };
+		6A6ADF86275E417800AC6237 /* ProgrammeDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammeDetailsCoordinator.swift; sourceTree = "<group>"; };
+		6A6ADF89275E41A900AC6237 /* ProgrammeDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammeDetailsVC.swift; sourceTree = "<group>"; };
+		6A6ADF8B275E422C00AC6237 /* ProgrammeModelDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgrammeModelDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +186,7 @@
 				6A6ADF4F275E25F300AC6237 /* AppCoordinator.swift */,
 				6A6ADF51275E261A00AC6237 /* SplashCoordinator.swift */,
 				6A6ADF53275E268700AC6237 /* ProgrammeListCoordinator.swift */,
+				6A6ADF86275E417800AC6237 /* ProgrammeDetailsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -187,6 +196,7 @@
 			children = (
 				6A6ADF55275E26D900AC6237 /* ProgrammeModel.swift */,
 				6A6ADF57275E26EB00AC6237 /* ListProgrammeModel.swift */,
+				6A6ADF8B275E422C00AC6237 /* ProgrammeModelDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -195,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				6A6ADF59275E275000AC6237 /* ListProgrammesVM.swift */,
+				6A6ADF84275E414B00AC6237 /* ProgrammeDetailsVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -202,6 +213,7 @@
 		6A6ADF42275E245A00AC6237 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6A6ADF88275E419800AC6237 /* ProgrammeDetailsVC */,
 				6A6ADF3C275E240D00AC6237 /* Ressources */,
 				6A6ADF68275E293000AC6237 /* SplashScreen */,
 				6A6ADF67275E291900AC6237 /* ListProgrammesVC */,
@@ -268,6 +280,14 @@
 				6A6ADF82275E36C200AC6237 /* ListProgrammeUc.swift */,
 			);
 			path = ListProgrammesUseCase;
+			sourceTree = "<group>";
+		};
+		6A6ADF88275E419800AC6237 /* ProgrammeDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				6A6ADF89275E41A900AC6237 /* ProgrammeDetailsVC.swift */,
+			);
+			path = ProgrammeDetailsVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,12 +405,16 @@
 				6A6ADF58275E26EB00AC6237 /* ListProgrammeModel.swift in Sources */,
 				6A6ADF2D275E1F3600AC6237 /* SplashViewController.swift in Sources */,
 				6A6ADF61275E28AC00AC6237 /* UIView.swift in Sources */,
+				6A6ADF87275E417800AC6237 /* ProgrammeDetailsCoordinator.swift in Sources */,
+				6A6ADF85275E414B00AC6237 /* ProgrammeDetailsVM.swift in Sources */,
 				6A6ADF29275E1F3600AC6237 /* AppDelegate.swift in Sources */,
+				6A6ADF8A275E41A900AC6237 /* ProgrammeDetailsVC.swift in Sources */,
 				6A6ADF6C275E29E900AC6237 /* UIImageView.swift in Sources */,
 				6A6ADF70275E2A5200AC6237 /* ProgrammeServiceProtocol.swift in Sources */,
 				6A6ADF5F275E286300AC6237 /* ProgrammeCell.swift in Sources */,
 				6A6ADF2B275E1F3600AC6237 /* SceneDelegate.swift in Sources */,
 				6A6ADF5A275E275000AC6237 /* ListProgrammesVM.swift in Sources */,
+				6A6ADF8C275E422C00AC6237 /* ProgrammeModelDetails.swift in Sources */,
 				6A6ADF5C275E282D00AC6237 /* ListProgrammesVC.swift in Sources */,
 				6A6ADF52275E261A00AC6237 /* SplashCoordinator.swift in Sources */,
 				6A6ADF66275E291100AC6237 /* ListProgrammesVC+SearchBar.swift in Sources */,

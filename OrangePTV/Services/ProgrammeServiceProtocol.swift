@@ -10,5 +10,6 @@ import Combine
 
 protocol ProgrammeServiceProtocol {
     func getData<T>(urlString : String)-> AnyPublisher<T,Error> where T : Codable
+    func getPitch(pitchUrl : String)-> AnyPublisher<String,Error>
 }
 

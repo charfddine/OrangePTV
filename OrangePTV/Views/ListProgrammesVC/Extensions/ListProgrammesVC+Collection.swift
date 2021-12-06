@@ -43,6 +43,7 @@ extension ListProgrammesVC : UICollectionViewDelegate,UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         endEditingSearchBar()
+        ProgrammeListCoordinator.init(navigationController: self.navigationController!).goToProgrammeDetails(programme :self.searchedProgramme[indexPath.row])
     }
     
 }

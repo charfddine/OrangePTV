@@ -22,4 +22,34 @@ final class ProgrammeServices : ProgrammeServiceProtocol{
         .eraseToAnyPublisher()
     }
     
+    // MARK: Récupération du Pitch pour un film ou une serie
+    func getPitch(pitchUrl : String)-> AnyPublisher<String, Error>{
+        let url = URL(string: apiUrl + pitchUrl)!
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .mapError { $0 as Error }
+            .map {
+                (data, response) in
+                let object = try? JSONSerialization.jsonObject(
+                    with: data,
+                    options: []
+                )
+                let nsDict = object as? NSDictionary
+                var pitch : String = ""
+                let contentDic = nsDict?.object(forKey: "contents")
+                
+                if  contentDic != nil {
+                    if (contentDic as! NSDictionary).object(forKey:"pitch") != nil{
+                        pitch = (contentDic as! NSDictionary).object(forKey:"pitch") as! String
+                    }else{
+                        let firstSeason = ((contentDic as! NSDictionary).object(forKey:"seasons") as! Array<NSDictionary>) [0]
+                        pitch = firstSeason.object(forKey: "pitch") as! String
+                    }
+                }
+                return pitch
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+
+    }
+    
 }
