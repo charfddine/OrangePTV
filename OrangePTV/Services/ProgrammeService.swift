@@ -12,7 +12,9 @@ final class ProgrammeServices : ProgrammeServiceProtocol{
 
     // MARK: Récupération de la liste des programmes chercher
     func getData<T>(urlString : String)-> AnyPublisher<T,Error> where T : Codable{
-        guard let url = URL(string: urlString) else { return Empty(completeImmediately: false).eraseToAnyPublisher() }
+        guard let url = URL(string: urlString) else {
+            return Result<T, Error>.failure(AppError.invalidUrl).publisher.eraseToAnyPublisher()
+        }
         return  URLSession.shared.dataTaskPublisher(for : url).map{ a in
             return a.data
         }
@@ -24,7 +26,9 @@ final class ProgrammeServices : ProgrammeServiceProtocol{
     
     // MARK: Récupération du Pitch pour un film ou une serie
     func getPitch(detailLink : String)-> AnyPublisher<String, Error>{
-        guard let url = URL(string: detailLink) else { return Empty(completeImmediately: false).eraseToAnyPublisher() }
+        guard let url = URL(string: detailLink) else {
+            return Result<String, Error>.failure(AppError.invalidUrl).publisher.eraseToAnyPublisher()
+        }
         return URLSession.shared.dataTaskPublisher(for: url)
             .mapError { $0 as Error }
             .map {
