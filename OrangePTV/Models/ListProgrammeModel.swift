@@ -7,9 +7,7 @@
 
 import Foundation
 
-struct ListProgrammesModel : Decodable{
-    
+struct ListProgrammesModel : Codable{
     let title : String?
     var contents : [ProgrammeModel]?
-
 }

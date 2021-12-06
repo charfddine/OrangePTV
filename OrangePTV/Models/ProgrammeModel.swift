@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct Title : Decodable{
+struct Title : Codable{
     let type : String?
     let value : String?
 }
 
-struct Playinfoid : Decodable{
+struct Playinfoid : Codable{
     let hd : String?
     let sd : String?
 }
 
-struct ProgrammeModel : Decodable{
+struct ProgrammeModel : Codable{
     let title : [Title]?
     let subtitle : String?
     let imageurl : String?

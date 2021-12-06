@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 protocol ProgrammeServiceProtocol {
-    func getData<T:Decodable>(urlString : String)-> AnyPublisher<T,Error>
-    func getPitch(pitchUrl : String)-> AnyPublisher<String,Error>
+    func getData<T>(urlString : String)-> AnyPublisher<T,Error> where T : Codable
 }
 

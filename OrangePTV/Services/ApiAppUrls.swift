@@ -12,6 +12,6 @@ let apiImageUrl = "https://statics.ocs.fr"
 let apiUrlImg = "https://api.ocs.fr/apps/v2"
 let searchUrl = apiUrl + "/apps/v2/contents?search=title%3D"
 enum AppError: Error {
-    case urlNotFound
-    case errorStatus
+    case invalidUrl
+    case invalidData
 }
