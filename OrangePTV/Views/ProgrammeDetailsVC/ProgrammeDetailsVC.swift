@@ -10,7 +10,21 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class ProgrammeDetailsVC : UIViewController{
+class ProgrammeDetailsVC : UIViewController, ProgrammeDetailsVMProtocol{
+    
+    var programmeMD: ProgrammeModelDetails?{
+        didSet{
+            ProgramTitleLabel.text = programmeMD?.programmeModel.title?[0].value
+            ProgramSubtitleLabel.text = programmeMD?.programmeModel.subtitle
+            if programmeMD?.programmeModel.imageurl != "" {
+                guard let imgUrl = programmeMD?.programmeModel.fullscreenimageurl else { return }
+                ProgrammeImage.downloaded(from: apiImageUrl +  imgUrl)
+            }else{
+                ProgrammeImage.image = UIImage(named: "No_image_available.jpg")
+            }
+            self.ProgramPitch.text = self.programmeMD?.pitch
+        }
+    }
     
     var navigationViewC : UINavigationController?
     
@@ -24,19 +38,8 @@ class ProgrammeDetailsVC : UIViewController{
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel?.delegate = self
         setUpViews()
-    }
-        
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(methodOfReceivedNotification), name: Notification.Name.init("PitchIsLoaded"), object: nil)
-
-    }
-    
-    @objc private func methodOfReceivedNotification(notification: NSNotification) {
-        DispatchQueue.main.async {
-            self.ProgramPitch.text = self.viewModel?.programme?.pitch
-        }
     }
     
     func setUpViews(){
@@ -59,18 +62,8 @@ class ProgrammeDetailsVC : UIViewController{
         ProgramPitch.anchor(top: ProgramSubtitleLabel.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 20, paddingRight: 10, width: 0, height: 0, enableInsets: false)
     }
     
-    var viewModel : ProgrammeDetailsVM? {
-        didSet {
-            ProgramTitleLabel.text = viewModel?.programme?.programmeModel.title?[0].value
-            ProgramSubtitleLabel.text = viewModel?.programme?.programmeModel.subtitle
-            ProgramPitch.text = viewModel?.programme?.pitch
-            if viewModel?.programme?.programmeModel.imageurl != "" {
-                ProgrammeImage.downloaded(from: apiImageUrl + viewModel!.programme!.programmeModel.fullscreenimageurl!)
-            }else{
-                ProgrammeImage.image = UIImage(named: "No_image_available.jpg")
-            }
-        }
-    }
+    var viewModel : ProgrammeDetailsVM?
+    
     
     private let ProgramTitleLabel : PaddingLabel = {
         let lbl = PaddingLabel()

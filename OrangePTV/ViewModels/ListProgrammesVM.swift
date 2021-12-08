@@ -9,10 +9,14 @@ import Foundation
 import Combine
 import UIKit
 
+protocol ListProgrammesVMProtocol{
+    var listProgrammes : [ProgrammeModel]? { get set}
+}
+
 final class ListProgrammesVM {
     
+    var delegate : ListProgrammesVMProtocol?
     let title = "List of Programs"
-    var listProgrammes : [ProgrammeModel]?
     private var observer : AnyCancellable?
     var coordinator : ProgrammeListCoordinator? = nil
     private let programmeService : ProgrammeServiceProtocol
@@ -33,12 +37,11 @@ final class ListProgrammesVM {
                 switch completion{
                 case .finished:
                     print("finished")
-                    NotificationCenter.default.post(name: Notification.Name.init("ListIsReloaded"), object: nil)
                 case .failure(let error):
                     print(error)
                 }
         },receiveValue: { [weak self] (value : ListProgrammesModel) in
-            self?.listProgrammes = value.contents
+            self?.delegate?.listProgrammes = value.contents
         })
             
     }
