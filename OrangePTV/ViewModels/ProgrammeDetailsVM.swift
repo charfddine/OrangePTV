@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class ProgrammeDetailsVM : ObservableObject{
+final class ProgrammeDetailsVM {
     
     let title = "Details Of Program"
     var coordinator : ProgrammeDetailsCoordinator?
