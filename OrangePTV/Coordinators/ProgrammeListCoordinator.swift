@@ -26,7 +26,6 @@ final class ProgrammeListCoordinator : Coordinator{
     
     func goToProgrammeDetails(programme : ProgrammeModel){
         let programmeDetailVM = ProgrammeDetailsVM()
-        programmeDetailVM.programme = ProgrammeModelDetails(programmeModel: programme, pitch: "")
         programmeDetailVM.getPitch(programM: programme)
         let programmeDetailsController : ProgrammeDetailsVC = ProgrammeDetailsVC.instantiate(programmeVM: programmeDetailVM,navigationVC : navigationController!)
         self.navigationController?.present(programmeDetailsController, animated: true, completion: nil)

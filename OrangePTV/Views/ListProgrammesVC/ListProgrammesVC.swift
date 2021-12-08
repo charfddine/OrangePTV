@@ -7,10 +7,8 @@
 
 import Foundation
 import UIKit
-import Combine
-import NotificationCenter
 
-class ListProgrammesVC: UIViewController {
+class ListProgrammesVC: UIViewController, ListProgrammesVMProtocol {
     
     var viewModel : ListProgrammesVM?
     var searchedProgramme : [ProgrammeModel] = []
@@ -39,6 +37,15 @@ class ListProgrammesVC: UIViewController {
         return cv
     }()
     
+    var listProgrammes: [ProgrammeModel]? = [] {
+        didSet{
+            DispatchQueue.main.async {
+                self.searchedProgramme = self.listProgrammes ?? []
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     static func instantiate(programmeViewModel : ListProgrammesVM)-> ListProgrammesVC{
         let storyBoard = UIStoryboard.init(name: "Main", bundle: .main)
         let mediaListVC : ListProgrammesVC = storyBoard.instantiateViewController(identifier: "ListProgrammesVC")
@@ -48,29 +55,16 @@ class ListProgrammesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchedProgramme = self.viewModel?.listProgrammes ?? []
         setupViews()
         collectionView.delegate = self
         collectionView.dataSource = self
+        self.viewModel?.delegate = self
         self.viewModel?.getSearchedListProgrammes(searchTxt: searchBar.text ?? "")
-    }
-    
-    @objc private func methodOfReceivedNotification(notification: NSNotification) {
-        DispatchQueue.main.async {
-            self.searchedProgramme = self.viewModel?.listProgrammes ?? []
-            self.collectionView.reloadData()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.setHidesBackButton(true, animated: false)
-        NotificationCenter.default.addObserver(self, selector: #selector(methodOfReceivedNotification), name: Notification.Name.init("ListIsReloaded"), object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.init("ListIsReloaded"), object: nil)
     }
     
     private func setupViews() {

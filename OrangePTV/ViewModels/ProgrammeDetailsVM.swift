@@ -8,11 +8,15 @@
 import Foundation
 import Combine
 
+protocol ProgrammeDetailsVMProtocol{
+    var programmeMD : ProgrammeModelDetails? { get set }
+}
+
 final class ProgrammeDetailsVM {
     
+    var delegate : ProgrammeDetailsVMProtocol?
     let title = "Details Of Program"
     var coordinator : ProgrammeDetailsCoordinator?
-    var programme : ProgrammeModelDetails?
     private var observer : AnyCancellable?
     private let programmeService : ProgrammeServiceProtocol
     
@@ -31,14 +35,11 @@ final class ProgrammeDetailsVM {
                 switch completion{
                 case .finished:
                     print("finished")
-                    NotificationCenter.default.post(name: Notification.Name.init("PitchIsLoaded"), object: nil)
                 case .failure(let error):
                     print(error)
                 }
             } receiveValue: { [weak self] value in
-                self?.programme = ProgrammeModelDetails(programmeModel: programM, pitch: value)
-                print(value)
+                self?.delegate?.programmeMD = ProgrammeModelDetails(programmeModel: programM, pitch: value)
         }
     }
-    
 }
